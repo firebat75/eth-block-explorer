@@ -1,5 +1,5 @@
 <script>
-  import { IconCube } from "@tabler/icons-svelte";
+  import { IconCube, IconPick } from "@tabler/icons-svelte";
   import { alchemy } from "$lib/stores";
   import { onMount } from "svelte";
   /**
@@ -43,30 +43,30 @@
     getBlock().then((value) => {
       block = value;
       date = new Date(block.timestamp * 1000);
-      var dateString = `${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${date.getDate()}`;
       console.log("block retrieved", blockNumber);
+      console.log(block);
     });
   });
 </script>
 
-<div class="card w-96 bg-neutral shadow-xl">
-  <div class="card-body">
-    <div>
-      <IconCube />
-      <h2 class="card-title">Block #{blockNumber}</h2>
+<div class="card card-compact w-96 bg-neutral shadow-xl rounded m-2">
+  <div class="card-body divide-y divide-neutral-content">
+    <div class="inline-flex align-middle rounded">
+      <div class="mr-1 p-1 h-min">
+        <IconCube size={48} />
+      </div>
+      <div>
+        <h2 class="card-title">Block #{blockNumber}</h2>
+        <p>
+          {`Timestamp: ${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`}
+        </p>
+      </div>
     </div>
-    <div>
-      <p>{block.transactions.length} txns</p>
-      <p>
-        {`Timestamp: ${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`}
-      </p>
-    </div>
-    <h2 class="card-title">Card title!</h2>
-    <p>If a dog chews shoes whose shoes does he choose?</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-primary">Buy Now</button>
+    <div class="pl-1 pt-1">
+      <p>Total Transactions: {block.transactions.length}</p>
+      <p>Miner: {block.miner.slice(0, 6)}...{block.miner.slice(-5, -1)}</p>
+      <p>Gas Limit: {block.gasLimit}</p>
+      <p>Gas Used: {block.gasUsed}</p>
     </div>
   </div>
 </div>
-<p>hello</p>
-<IconCube />

@@ -15,18 +15,22 @@
    */
   let blockNumber = 0;
   async function getBlockNumber() {
-    blockNumber = await alchemy.core.getBlockNumber();
-    return blockNumber;
+    return await alchemy.core.getBlockNumber();
   }
 
   onMount(async () => {
     console.log("mounting home page");
     getBlockNumber().then((value) => {
-      console.log("block number retrieved", value);
+      blockNumber = value;
+      console.log("block number retrieved", blockNumber);
     });
   });
 </script>
 
 <h1 class="text-3xl font-bold underline">Block Explorer</h1>
-<p>Current Block: {blockNumber}</p>
-<BlockPreview {blockNumber} />
+<div>
+  <h3>Recent Blocks</h3>
+  {#each { length: 4 } as _, i}
+    <BlockPreview blockNumber={blockNumber - i} />
+  {/each}
+</div>
