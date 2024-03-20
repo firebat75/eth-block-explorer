@@ -42,9 +42,9 @@
     console.log("mounting block preview", blockNumber);
     getBlock().then((value) => {
       block = value;
-      date = Date(block.timestamp * 1000);
-      console.log("block retrieved", block);
-      console.log(date);
+      date = new Date(block.timestamp * 1000);
+      var dateString = `${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${date.getDate()}`;
+      console.log("block retrieved", blockNumber);
     });
   });
 </script>
@@ -57,6 +57,9 @@
     </div>
     <div>
       <p>{block.transactions.length} transactions</p>
+      <p>
+        {`Mined on ${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} at ${String(date.getHours()).padStart(2, "0")}-${String(date.getMinutes()).padStart(2, "0")}-${String(date.getSeconds()).padStart(2, "0")}`}
+      </p>
     </div>
     <h2 class="card-title">Card title!</h2>
     <p>If a dog chews shoes whose shoes does he choose?</p>
