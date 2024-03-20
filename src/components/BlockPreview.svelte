@@ -53,12 +53,12 @@
   <div class="card-body">
     <div>
       <IconCube />
-      <p>Block #{blockNumber}</p>
+      <h2 class="card-title">Block #{blockNumber}</h2>
     </div>
     <div>
-      <p>{block.transactions.length} transactions</p>
+      <p>{block.transactions.length} txns</p>
       <p>
-        {`Mined on ${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} at ${String(date.getHours()).padStart(2, "0")}-${String(date.getMinutes()).padStart(2, "0")}-${String(date.getSeconds()).padStart(2, "0")}`}
+        {`Timestamp: ${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`}
       </p>
     </div>
     <h2 class="card-title">Card title!</h2>
