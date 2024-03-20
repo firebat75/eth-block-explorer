@@ -2,6 +2,7 @@
     import { PUBLIC_API_KEY } from "$env/static/public";
     import { Alchemy, Network } from "alchemy-sdk";
     import { onMount } from "svelte";
+    import { BlockPreview } from "components/BlockPreview.svelte";
 
     const settings = {
         apiKey: PUBLIC_API_KEY,
@@ -41,3 +42,4 @@
 <h1 class="text-3xl font-bold underline">Block Explorer</h1>
 <p>Current Block: {blockNumber}</p>
 <p>Current Block: {block}</p>
+<BlockPreview />
