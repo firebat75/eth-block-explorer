@@ -7,24 +7,37 @@
         apiKey: PUBLIC_API_KEY,
         network: Network.ETH_MAINNET,
     };
-
     const alchemy = new Alchemy(settings);
 
     /**
      * @type {number}
      */
+    let blockNumber;
+    async function getBlockNumber() {
+        blockNumber = await alchemy.core.getBlockNumber();
+        return blockNumber;
+    }
+
+    /**
+     * @type {import("alchemy-sdk").Block}
+     */
     let block;
     async function getBlock() {
-        block = await alchemy.core.getBlockNumber();
+        block = await alchemy.core.getBlock(blockNumber);
+        return block;
     }
 
     onMount(async () => {
-        getBlock();
+        console.log("mounting");
+        getBlockNumber().then((value) => {
+            console.log(value);
+            getBlock().then((value) => {
+                console.log(value);
+            });
+        });
     });
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>
-    Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-</p>
+<h1 class="text-3xl font-bold underline">Block Explorer</h1>
+<p>Current Block: {blockNumber}</p>
 <p>Current Block: {block}</p>
